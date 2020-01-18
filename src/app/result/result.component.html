@@ -1,0 +1,19 @@
+<div>
+    <!-- <h3>Data of the Donor</h3>
+    <h3>Name: {{tname}}</h3>
+    <h3>Gender: {{tgender}}</h3>
+    <h3>Address: {{taddress}}</h3>
+    <h3>Date of Birth: {{tdate}}</h3>
+    <h3>Email: {{temail}}</h3>
+    <h3>Religion: {{treligion}}</h3>
+    <h3>Organs to Donate: {{torgans}}</h3> -->
+
+    <ul>
+        <!-- <li>{{nameData}}</li> -->
+        <li *ngFor = "let data of datas">
+                <p>Name: {{data.fullname}} || Gender: {{data.gender}} || Address: {{data.address}} 
+                    || Date of Birth: {{data.date}} ||Age: {{data.age}}|| Contact: {{data.contact}}|| Email: {{data.emails}} || 
+                    Religion: {{data.religion}} || Organs to Donate: {{data.organs}}</p>
+        </li>
+    </ul>
+</div>
