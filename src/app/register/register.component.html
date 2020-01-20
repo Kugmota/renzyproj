@@ -1,44 +1,44 @@
 <h1 class="title">Organs Donation Fill up Form</h1>
 <div class="card">
-    <form (ngSubmit)="onSubmit()" #fillup="ngForm">
-        <h3>Fullname: <input name="name" [(ngModel)]="fullname" required #name="ngModel" /></h3>
-        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger"></div>
-        <div *ngIf="name.touched && !name.valid">Name is required!</div>
+    <form (submit)="onSubmit(fillup)" #fillup="ngForm">
+        <h3>Fullname: <input name="fullname" [(ngModel)]="inf.fullname" required #fullname="ngModel" /></h3>
+        <div *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)" class="alert alert-danger"></div>
+        <div *ngIf="fullname.touched && !fullname.valid">Name is required!</div>
         <div>
-            <h3>Gender: <select required [(ngModel)]="gender" [ngModelOptions]="{standalone: true}">
+            <h3>Gender: <select ngModel name="gender" required [(ngModel)]="inf.gender" #gender="ngModel" >
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select></h3>
         </div>
         <div>
-            <h3>Address: <input [(ngModel)]="addresses" name="address" required #address="ngModel" /></h3>
-            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger"></div>
-            <div *ngIf="address.touched && !address.valid">Address is required</div>
+            <h3>Address: <input [(ngModel)]="inf.addresses" name="addresses" required #addresses="ngModel" /></h3>
+            <div *ngIf="addresses.invalid && (addresses.dirty || addresses.touched)" class="alert alert-danger"></div>
+            <div *ngIf="addresses.touched && !addresses.valid">Address is required</div>
         </div>
         <div>
-            <h3>Contact Number <input type="tel" [(ngModel)]="contact" name="contact" #number="ngModel" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}"
+            <h3>Contact Number <input type="tel" [(ngModel)]="inf.contact" name="contact" #contact="ngModel" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}"
                     required><span> Format: 0923-161-5542</span></h3>
-            <div *ngIf="number.invalid && (number.dirty || number.touched)" class="alert alert-danger"></div>
-            <div *ngIf="number.touched && !number.valid">Your contact number is required for emergency purposes</div>
+            <div *ngIf="contact.invalid && (contact.dirty || contact.touched)" class="alert alert-danger"></div>
+            <div *ngIf="contact.touched && !contact.valid">Your contact number is required for emergency purposes</div>
         </div>
         <div>
-            <h3>Date of Birth: <input type="date" [(ngModel)]="date" name="date" required #petsa="ngModel" /></h3>
+            <h3>Date of Birth: <input type="date" [(ngModel)]="inf.date" name="date" required #date="ngModel" /></h3>
         </div>
         <div>
-            <h3>Age: <input type="number" [(ngModel)]="age" name="age" required #edad="ngModel" /></h3>
+            <h3>Age: <input type="number" [(ngModel)]="inf.age" name="age" required #age="ngModel" /></h3>
         </div>
         <div>
-            <h3>Email: <input email="email" [(ngModel)]="emails" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                    #email="ngModel" [ngModelOptions]={standalone:true} /> Format: ...@gmail.com</h3>
-            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger"></div>
-            <div *ngIf="email.touched && !email.valid">Email is required!</div>
+            <h3>Email: <input ngModel name="emails"  [(ngModel)]="inf.emails" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    #emails="ngModel" /> Format: ...@gmail.com</h3>
+            <div *ngIf="emails.invalid && (emails.dirty || emails.touched)" class="alert alert-danger"></div>
+            <div *ngIf="emails.touched && !emails.valid">Email is required!</div>
 
         </div>
         <div>
-            <h3>Religion: <input religion="religion" [(ngModel)]="religion" name="religion" required #pagtuo="ngModel" /></h3>
+            <h3>Religion: <input name="religion" [(ngModel)]="inf.religion" name="religion" required #religion="ngModel" /></h3>
         </div>
         <div>
-            <h3>Organs to donate: <select required [(ngModel)]="organs" [ngModelOptions]="{standalone: true}">
+            <h3>Organs to donate: <select ngModel name="organs" #organs="ngModel"  required [(ngModel)]="inf.organs">
                     <option value="Eye Only">Eye</option>
                     <option value="Heart Only">Heart</option>
                     <option value="Kidney Only">Kidney</option>
@@ -51,29 +51,12 @@
                 </select></h3>
 
         </div>
+        
 
-
+        <button class="btn" [disabled] = !fillup.form.valid>Submit</button>
     </form>
 
 
-    <button class="btn" (click)="onSubmit()" [disabled]=!fillup.form.valid>Submit</button>
-
-    <div *ngIf="data">
-        <h1>Data</h1>
-        <h2>Name: {{tname}}</h2>
-        <h2>Age: {{tage}}</h2>
-        <h2>Gender: {{tgender}}</h2>
-        <h2>Address: {{taddress}}</h2>
-        <h2>Date of Birth: {{tdate}}</h2>
-        <h2>Email: {{temail}}</h2>
-        <h2>Religion: {{treligion}}</h2>
-        <h2>Contact Number: {{tcontact}}</h2>
-        <h2>Organs to Donate: {{torgans}}</h2>
-
-        <button (click)="onEdit()">Edit</button>
-        <button (click)="onConfirm()">Confirm</button>
-    </div>
-
 </div>
 
-<app-result (childEvent)="data=$event" [datas]="infoArr" ></app-result>
+<app-result (childEvent)="onEdit($event)" [listOfInfoChild]="listOfInfo" ></app-result>

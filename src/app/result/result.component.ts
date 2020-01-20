@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Info } from '../register/info';
 
 @Component({
   selector: 'app-result',
@@ -6,26 +7,17 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./result.component.css']
 })
 export class ResultComponent implements OnInit {
-
-  @Input() datas:any[];
-  // @Input() genderData:string;
-  // @Input() addressData:string;
-  // @Input() birthData:string;
-  // @Input() ageData:string;
-  // @Input() contactData:string;
-  // @Input() emailData:string;
-  // @Input() religionData:string;
-  // @Input() organsData:string;
+  @Input() listOfInfoChild: Array<Info>;
   @Output() childEvent = new EventEmitter();
-  @Output() resultEvent = new EventEmitter();
-  public cdata: any;
-  public donors: []
-  
-  
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onEdit(form){
+    this.childEvent.emit(form);
+  
   }
 
 }
